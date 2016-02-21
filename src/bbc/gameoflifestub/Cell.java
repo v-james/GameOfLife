@@ -8,7 +8,7 @@ public class Cell {
 		this.x = x;
 		this.y = y;		
 	}
-	//check
+	
 	public int hashCode(){
 		return 31 * 31 * x + 31 * y;
 	}
@@ -16,5 +16,9 @@ public class Cell {
 	public boolean equals(Object other){
 		Cell otherCell = (Cell)other;
 		return otherCell.x == x && otherCell.y == y; 
+	}
+	
+	public String toString(){
+		return "*";
 	}
 }
