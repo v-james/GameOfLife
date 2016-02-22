@@ -3,10 +3,20 @@ package bbc.gameoflifestub;
 public class Cell {
 	private int x;
 	private int y;
+	boolean alive;
 
-	public Cell(int x, int y){
+	public Cell(int x, int y, boolean alive){
 		this.x = x;
 		this.y = y;		
+		this.alive = alive;
+	}
+	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
 	}
 	
 	public int hashCode(){
@@ -19,6 +29,14 @@ public class Cell {
 	}
 	
 	public String toString(){
-		return "*";
+		String output= "";
+		if (alive){
+			output = "*";
+		}
+		if (!alive){
+			output = ".";
+		}
+		return output;
+		
 	}
 }

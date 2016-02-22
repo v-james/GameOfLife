@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		try{
 		String initialStateInput = getInitialState();
-		HashSet<Cell> initialGrid = populateGrid(initialStateInput);
+		Grid initialGrid = populateGrid(initialStateInput);
 		System.out.println(initialGrid);
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -18,25 +18,44 @@ public class Main {
 
 	}
 	
-	public static HashSet<Cell> populateGrid(String initialState){
-		HashSet<Cell> initialGrid = new HashSet<Cell>();
+	public static Grid populateGrid(String initialState){
+		HashSet<Cell> cells = new HashSet<Cell>();
 		Scanner scanner = new Scanner(initialState);
-		
-		while (scanner.hasNext()){
-			if (scanner.next().equals(".")){
-				Cell deadCell = new Cell(0,0);
-				initialGrid.add(deadCell);
+
+		int length = initialState.length();
+		int i = 0;
+		int j = 0;
+
+		while (scanner.hasNext()) {
+			String inputValue = scanner.next();
+			
+			if (inputValue.equals(".")) {
+				Cell deadCell = new Cell(i, j, false);
+				cells.add(deadCell);
+				i++;
+			} else if (inputValue.equals("*")) {
+				Cell deadCell = new Cell(i, j, true);
+				cells.add(deadCell);
+				i++;
 			}
+
+			else if (inputValue.equals("/")) {
+				j++;
+				i=0;
+			}
+
 		}
 		scanner.close();
-		return initialGrid;
 		
+		Grid initialGrid = new Grid(cells, i, j);
+		return initialGrid;
+
 	}
 	
 	public static String getInitialState() throws Exception {
 
 		// prompt user to enter initial game of life state
-		System.out.println("Please specifiy the initial state for the Game Of Life. Insert a / for a new line");
+		System.out.println("Please specifiy the initial state for the Game Of Life. Insert a / for a new line. Separate cells with a space.");
 		InputStreamReader r = new InputStreamReader(System.in);
 
 		// new buffered reader object from users input, r.
@@ -52,20 +71,15 @@ public class Main {
 			if (s.isEmpty()) {
 				System.out.println("No user input found, all cells are assumed dead.");
 				s = ".";
-				System.out.println("Initial state for this Game of Life is:");
-				System.out.println(s);
 			}
 
 		} catch (Exception e) {
 			System.out.println("User input error: " + e);
 			System.out.println("All cells assumed dead");
 			s = ".";
-			System.out.println("Initial state for this Game of Life is:");
-			System.out.println(s);
 		}
 		
-		System.out.println("Initial state for this Game of Life is:");
-		System.out.println(s);
+		
 		
 		return s;
 	}
