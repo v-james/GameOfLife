@@ -16,9 +16,14 @@ public class LifeTest {
 	@Before
 	public void setUp(){
     	setOfCells = new HashSet<Cell>();
-    	setOfCells.add(new Cell(1,1));
-    	setOfCells.add(new Cell(2,2));
-        life = new Life(setOfCells);
+    	setOfCells.add(new Cell(1,1, true));
+    	setOfCells.add(new Cell(2,2, true));
+    	try{
+        life = new Life(setOfCells, 2,1);
+    	}
+    	catch(Exception e){
+    		e.printStackTrace();
+    	}
     }
 	
 	@Test
@@ -30,7 +35,8 @@ public class LifeTest {
     @Test
     public void testUnderpopulation()
     {
-        assertFalse(life.cellShouldSurvive(0));
-        assertFalse(life.cellShouldSurvive(1));
+    	
+        assertFalse(life.cellShouldSurvive(0, true));
+        assertFalse(life.cellShouldSurvive(1, true));
     }
 }

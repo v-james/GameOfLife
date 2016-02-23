@@ -19,6 +19,15 @@ public class Cell {
 		return y;
 	}
 	
+	public boolean isAlive(){
+		
+		if (alive){
+			return true;
+		}
+		
+		else return false;
+	}
+	
 	public int hashCode(){
 		return 31 * 31 * x + 31 * y;
 	}
