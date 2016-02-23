@@ -1,5 +1,8 @@
 package bbc.gameoflifestub;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class Life {
@@ -8,17 +11,45 @@ public class Life {
 	int gridX; //first x value in grid = 0
 	int gridY; //first y value in grid = 0
 
-	public Life(Set<Cell> initialLiveCells, int gridX, int gridY) throws Exception
+	public Life(Set<Cell> initialLiveCells, int gridX, int gridY) 
     {
 		this.liveCells = initialLiveCells;
 		this.gridX = gridX;
 		this.gridY = gridY;
 		
-		if (gridX<initialLiveCells.size()){
-			throw new Exception("grid does not enclose all cells");
-		}
+		
 	}
 	
+	public Life runIteration() throws Exception{
+		int x = 0;
+		int y = 0;
+		
+		HashSet<Cell> newLiveCells = new HashSet<Cell>();
+		
+		//loop through all positions on grid
+		for (y = 0; y <= gridY; y++) {
+			for (x = 0; x <= gridX; x++) {
+				Cell currentCell = new Cell(x, y, true);
+				int liveNeighbourCount = getNumLiveNeighbours(currentCell);
+				
+				//cell is alive
+				if (liveCells.contains(currentCell)){
+					
+					//check if it should stay alive
+					if(cellShouldSurvive(liveNeighbourCount, true)){
+						//add live cell in this position to new live cell set
+						newLiveCells.add(currentCell);
+					}
+					
+				}
+				//check if cell should become alive
+				if(cellShouldSurvive(liveNeighbourCount, false)){
+					newLiveCells.add(currentCell);
+				}
+			}
+		}
+		return new Life(newLiveCells, gridX, gridY);
+	}	
     // Read-only access to the game state
     public Set<Cell> getLiveCells()
     {
@@ -93,5 +124,31 @@ public class Life {
     		return true;
     	}
     	return false;
+    }
+    
+    public String toString(){
+    	int x=0;
+    	int y=0;
+    	StringBuilder grid = new StringBuilder();
+    	
+    	for (y=0; y<=gridY; y++){
+    		
+    		StringBuilder line = new StringBuilder();
+    		
+    		for (x=0; x<=gridX; x++){
+    			Cell currentCell = new Cell(x,y, true);
+    			if (liveCells.contains(currentCell)){
+    				line.append("*");
+    			}
+    			else{
+    				line.append(".");
+    			}
+    		}
+    		grid.append(line);
+    		
+    	}
+   
+    	String gridString = grid.toString();
+    	return gridString;
     }
 }

@@ -19,7 +19,7 @@ public class LifeTest {
     	setOfCells.add(new Cell(1,1, true));
     	setOfCells.add(new Cell(2,2, true));
     	try{
-        life = new Life(setOfCells, 2,2);
+    		life = new Life(setOfCells, 2,2); //add set of live cells to grid of dimensions 3x3 
     	}
     	catch(Exception e){
     		e.printStackTrace();

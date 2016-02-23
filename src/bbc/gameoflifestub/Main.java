@@ -4,25 +4,62 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.Set;
 
 public class Main {
 
 	public static void main(String[] args) {
 		try{
 		String initialStateInput = getInitialState();
-		Grid initialGrid = populateGrid(initialStateInput);
-		System.out.println(initialGrid);
+		Life initialLife = generateLife(initialStateInput);
+		System.out.println("1: "+ initialLife);
+		
+		Life iteration2 = initialLife.runIteration();
+		System.out.println("2: " + iteration2);
+		
+		Life iteration3 = iteration2.runIteration();
+		System.out.println("3: "+ iteration3);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
 
 	}
 	
+	public static Life generateLife(String initialState) throws Exception{
+		HashSet<Cell> liveCells = new HashSet<Cell>();
+		Scanner scanner = new Scanner(initialState);
+		
+		int i = 0;
+		int j = 0;
+		while (scanner.hasNext()){
+			String inputValue = scanner.next();
+			
+			if (inputValue.equals(".")) {
+				i++;
+				
+			} else if (inputValue.equals("*")) {
+				Cell liveCell = new Cell(i, j, true);
+				liveCells.add(liveCell);
+				i++;
+			}
+
+			else if (inputValue.equals("/")) {
+				j++;
+				i=0;
+			}
+		}
+		scanner.close();
+		
+		
+		Life life = new Life(liveCells, i-1,j); //need to do 1 less here for i since i has increased by one (waiting for next cell)
+		return life;
+	}
+	
 	public static Grid populateGrid(String initialState){
 		HashSet<Cell> cells = new HashSet<Cell>();
 		Scanner scanner = new Scanner(initialState);
 
-		int length = initialState.length();
 		int i = 0;
 		int j = 0;
 
