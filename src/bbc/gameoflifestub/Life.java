@@ -5,8 +5,8 @@ import java.util.Set;
 public class Life {
 
 	private Set<Cell> liveCells;
-	int gridX;
-	int gridY;
+	int gridX; //first x value in grid = 0
+	int gridY; //first y value in grid = 0
 
 	public Life(Set<Cell> initialLiveCells, int gridX, int gridY) throws Exception
     {
@@ -15,7 +15,7 @@ public class Life {
 		this.gridY = gridY;
 		
 		if (gridX<initialLiveCells.size()){
-			throw new Exception("grid is smaller than number of cells added");
+			throw new Exception("grid does not enclose all cells");
 		}
 	}
 	
@@ -37,24 +37,28 @@ public class Life {
     	if(currentCellX == 0){
     		lowerXBound = currentCellX;
     	}
+    	else{
+    		lowerXBound = currentCellX -1;
+    	}
     	
     	if(currentCellX == gridX){
     		upperXBound = currentCellX;
     	}
     	else{
-    		lowerXBound = currentCellX -1;
     		upperXBound = currentCellX +1;
     	}
     	
     	if(currentCellY == 0){
     		lowerYBound = currentCellY;
     	}
+    	else{
+    		lowerYBound = currentCellY-1;
+    	}
     	if(currentCellY == gridY){
     		upperYBound = currentCellY;
     	}
     	else{
-    		lowerYBound = currentCellY -1;
-    		upperYBound = currentCellY +1;
+    		upperYBound = currentCellY+1;
     	}
     	int x;
     	int y;
@@ -65,8 +69,9 @@ public class Life {
     		for (y=lowerYBound; y<=upperYBound; y++){
     			
     			Cell cellToCheck = new Cell(x, y, true);
-    			if (liveCells.contains(cellToCheck)){
-    				numLiveCells=+1;
+    			Cell originalCell = new Cell(currentCellX, currentCellY, true);
+    			if (liveCells.contains(cellToCheck) && !cellToCheck.equals(originalCell)){
+    				numLiveCells = numLiveCells +1;
     			}
     		}
     	}
@@ -83,6 +88,7 @@ public class Life {
     		}
     		return false;
     	}
+    	
     	else if(numNeighbours == 3){
     		return true;
     	}
