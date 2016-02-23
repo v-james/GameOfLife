@@ -13,13 +13,16 @@ public class Main {
 		try{
 		String initialStateInput = getInitialState();
 		Life initialLife = generateLife(initialStateInput);
-		System.out.println("1: "+ initialLife);
+		System.out.println("1: ");
+		System.out.println(initialLife);
 		
 		Life iteration2 = initialLife.runIteration();
-		System.out.println("2: " + iteration2);
+		System.out.println("2: ");
+		System.out.println(iteration2);
 		
 		Life iteration3 = iteration2.runIteration();
-		System.out.println("3: "+ iteration3);
+		System.out.println("3: ");
+		System.out.println(iteration3);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -56,39 +59,7 @@ public class Main {
 		return life;
 	}
 	
-	public static Grid populateGrid(String initialState){
-		HashSet<Cell> cells = new HashSet<Cell>();
-		Scanner scanner = new Scanner(initialState);
 
-		int i = 0;
-		int j = 0;
-
-		while (scanner.hasNext()) {
-			String inputValue = scanner.next();
-			
-			if (inputValue.equals(".")) {
-				Cell deadCell = new Cell(i, j, false);
-				cells.add(deadCell);
-				i++;
-			} else if (inputValue.equals("*")) {
-				Cell deadCell = new Cell(i, j, true);
-				cells.add(deadCell);
-				i++;
-			}
-
-			else if (inputValue.equals("/")) {
-				j++;
-				i=0;
-			}
-
-		}
-		scanner.close();
-		
-		Grid initialGrid = new Grid(cells, i, j);
-		return initialGrid;
-
-	}
-	
 	public static String getInitialState() throws Exception {
 
 		// prompt user to enter initial game of life state

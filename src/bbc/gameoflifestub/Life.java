@@ -145,6 +145,7 @@ public class Life {
     			}
     		}
     		grid.append(line);
+    		grid.append("\n");
     		
     	}
    
