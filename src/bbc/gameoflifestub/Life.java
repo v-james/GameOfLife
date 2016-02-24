@@ -127,11 +127,11 @@ public class Life {
     }
     
     public String toString(){
-    	int x=0;
-    	int y=0;
+    	int x = 0;
+    	int y = gridY;
     	StringBuilder grid = new StringBuilder();
     	
-    	for (y=0; y<=gridY; y++){
+    	for (y=gridY; y>=0; y = y-1){
     		
     		StringBuilder line = new StringBuilder();
     		

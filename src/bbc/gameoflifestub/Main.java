@@ -1,6 +1,7 @@
 package bbc.gameoflifestub;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -13,16 +14,28 @@ public class Main {
 		try{
 		String initialStateInput = getInitialState();
 		Life initialLife = generateLife(initialStateInput);
-		System.out.println("1: ");
-		System.out.println(initialLife);
+		System.out.println("Initial state: \n"+initialLife);
 		
-		Life iteration2 = initialLife.runIteration();
-		System.out.println("2: ");
-		System.out.println(iteration2);
-		
-		Life iteration3 = iteration2.runIteration();
-		System.out.println("3: ");
-		System.out.println(iteration3);
+		String iterationNumString = getIterationNumber();
+		int iterationNum = Integer.parseInt(iterationNumString);
+		int i =1;
+		Life iteration = initialLife;
+		for (i=1; i<= iterationNum; i++){
+			System.out.println("iteartion number " +i+":");
+			Life nextLife = iteration.runIteration();
+			System.out.println(nextLife);
+			iteration = nextLife;
+		}
+//		System.out.println("1: ");
+//		System.out.println(initialLife);
+//		
+//		Life iteration2 = initialLife.runIteration();
+//		System.out.println("2: ");
+//		System.out.println(iteration2);
+//		
+//		Life iteration3 = iteration2.runIteration();
+//		System.out.println("3: ");
+//		System.out.println(iteration3);
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -59,6 +72,23 @@ public class Main {
 		return life;
 	}
 	
+	public static String getIterationNumber() throws IOException{
+		
+		//prompt user to enter iteration number
+		System.out.println("Please enter the number of iterations you wish for this Game of Life");
+		
+		InputStreamReader r = new InputStreamReader(System.in);
+
+		// new buffered reader object from users input, r.
+		BufferedReader b = new BufferedReader(r);
+
+		// initiate variable for users input
+		String s;
+		
+		s = b.readLine();
+		
+		return s;
+	}
 
 	public static String getInitialState() throws Exception {
 
