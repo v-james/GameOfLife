@@ -1,10 +1,21 @@
 package bbc.gameoflifestub;
 
+/**
+ * Class representing a cell in the Game Of Life
+ * @author vickyjames
+ *
+ */
 public class Cell {
-	private int x;
-	private int y;
+	private int x; //grid coordinate
+	private int y; //grid coordinate
 	boolean alive;
 
+	/**
+	 * Constructor
+	 * @param int x
+	 * @param int y
+	 * @param alive
+	 */
 	public Cell(int x, int y, boolean alive){
 		this.x = x;
 		this.y = y;		
@@ -24,7 +35,6 @@ public class Cell {
 		if (alive){
 			return true;
 		}
-		
 		else return false;
 	}
 	
@@ -37,6 +47,11 @@ public class Cell {
 		return otherCell.x == x && otherCell.y == y; 
 	}
 	
+	/**
+	 * Generates the String representation of Cell object:
+	 * alive = *
+	 * dead = .
+	 */
 	public String toString(){
 		String output= "";
 		if (alive){

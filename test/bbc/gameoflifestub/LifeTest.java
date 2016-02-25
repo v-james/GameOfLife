@@ -32,8 +32,14 @@ public class LifeTest {
 		assertEquals(2, life.getLiveCells().size());
 	}
 
+	
+	/**
+	 * tests number of live neighbours for each cell in a 3x3 grid such as that made in setUp
+	 *
+	 */
 	@Test
 	public void testNumNeighbours(){
+	
 		Cell cell00 = new Cell(0,0, false);
 		assertEquals(1, life.getNumLiveNeighbours(cell00));
 		
@@ -65,21 +71,24 @@ public class LifeTest {
     @Test
     public void testUnderpopulation()
     {
-    	
+    	//all under population scenarios
         assertFalse(life.cellShouldSurvive(0, true));
         assertFalse(life.cellShouldSurvive(1, true));
         assertFalse(life.cellShouldSurvive(0, false));
         assertFalse(life.cellShouldSurvive(1, false));
+        assertFalse(life.cellShouldSurvive(2, false));
     }
     
     @Test
     public void testOverpopulation(){
+    	//over pop scenarios are infinite so only chose first scenario
     	assertFalse(life.cellShouldSurvive(4, true));
         assertFalse(life.cellShouldSurvive(4, false));
     }
     
     @Test
     public void testCreationOfLife(){
+    	//all creation of life scenarios up to 4 alive neighbours
     	assertFalse(life.cellShouldSurvive(0, false));
     	assertFalse(life.cellShouldSurvive(1, false));
     	assertFalse(life.cellShouldSurvive(2, false));
@@ -89,6 +98,7 @@ public class LifeTest {
     
     @Test
     public void testSurvival(){
+    	//all survival scenarios
     	assertTrue(life.cellShouldSurvive(3, true));
     	assertTrue(life.cellShouldSurvive(2, true));
     }
