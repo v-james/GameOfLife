@@ -8,7 +8,7 @@ package bbc.gameoflifestub;
 public class Cell {
 	private int x; //grid coordinate
 	private int y; //grid coordinate
-	boolean alive;
+	boolean alive; 
 
 	/**
 	 * Constructor
