@@ -7,7 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-	
+/**
+ * Class to test the Life Class by creating an iteration of Life with two alive cells in a 3 by 3 grid.
+ * @author vickyjames
+ *
+ */
 public class LifeTest {
 
 	protected Set<Cell> setOfCells;
