@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Scanner;
 /**
- * Main class that obtains initial grid set up from user and runs iterations for the Game Of Life
+ * Main class that obtains initial grid set up from user and runs iterations for the Game Of Life.
  * @author vickyjames
  *
  */
